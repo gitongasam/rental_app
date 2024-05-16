@@ -1,6 +1,7 @@
 package com.tenant_service.tenant_service.Service;
 
 import com.tenant_service.tenant_service.Entity.Tenant;
+import com.tenant_service.tenant_service.VO.ResponseTemplateVo;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface TenantService {
     Tenant getTenant(Long tenantID);
 
     List<Tenant> getAllTenants();
+
+    ResponseTemplateVo getTenantWithRoom(Long id);
 }

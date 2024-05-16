@@ -2,6 +2,7 @@ package com.tenant_service.tenant_service.Controler;
 
 import com.tenant_service.tenant_service.Entity.Tenant;
 import com.tenant_service.tenant_service.Service.TenantService;
+import com.tenant_service.tenant_service.VO.ResponseTemplateVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/api/tenants")
+@RequestMapping("/api/v1/tenants")
 @RestController
 @RequiredArgsConstructor
 
@@ -22,7 +23,7 @@ public class TenantController {
         return new ResponseEntity<>(newTenant, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{tenantID}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTenant(@PathVariable Long tenantID) {
         tenantService.deleteTenant(tenantID);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -34,15 +35,17 @@ public class TenantController {
         return new ResponseEntity<>(updatedTenant, HttpStatus.OK);
     }
 
-    @GetMapping("/{tenantID}")
-    public ResponseEntity<Tenant> getTenant(@PathVariable Long tenantID) {
-        Tenant tenant = tenantService.getTenant(tenantID);
-        return new ResponseEntity<>(tenant, HttpStatus.OK);
-    }
+
 
     @GetMapping
     public ResponseEntity<List<Tenant>> getAllTenants() {
         List<Tenant> tenants = tenantService.getAllTenants();
         return new ResponseEntity<>(tenants, HttpStatus.OK);
+    }
+
+
+    @GetMapping("{id}")
+    public ResponseTemplateVo getTenantWithRoom(@PathVariable Long id){
+        return tenantService.getTenantWithRoom(id);
     }
 }
