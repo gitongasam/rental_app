@@ -22,5 +22,7 @@ public class Tenant {
     private String username;
     private String password; // hashed
     private double balance=0.0;
-    private String contactInformation;
+    private String phoneNumber;
+    private Long roomId;
+
 }

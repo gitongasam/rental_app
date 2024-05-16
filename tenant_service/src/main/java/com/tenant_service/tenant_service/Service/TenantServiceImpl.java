@@ -2,15 +2,22 @@ package com.tenant_service.tenant_service.Service;
 
 import com.tenant_service.tenant_service.Entity.Tenant;
 import com.tenant_service.tenant_service.Repository.TenantRepository;
+import com.tenant_service.tenant_service.VO.ResponseTemplateVo;
+import com.tenant_service.tenant_service.VO.Room;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class TenantServiceImpl implements TenantService{
-    private TenantRepository tenantRepository;
+    private final TenantRepository tenantRepository;
+
+    @Autowired
+    private WebClient webClient;
 
     @Override
     public Tenant addTenant(Tenant tenant) {
@@ -33,7 +40,7 @@ public class TenantServiceImpl implements TenantService{
         existingTenant.setPassword(tenant.getPassword());
         existingTenant.setBalance(tenant.getBalance());
         existingTenant.setName(tenant.getName());
-        existingTenant.setContactInformation(tenant.getContactInformation());
+        existingTenant.setPhoneNumber(tenant.getPhoneNumber());
 
         return tenantRepository.save(existingTenant);
     }
@@ -47,5 +54,22 @@ public class TenantServiceImpl implements TenantService{
     @Override
     public List<Tenant> getAllTenants() {
         return tenantRepository.findAll();
+    }
+
+    @Override
+    public ResponseTemplateVo getTenantWithRoom(Long id) {
+        ResponseTemplateVo vo = new ResponseTemplateVo();
+        Tenant tenant = tenantRepository.findById(id).get();
+
+        Room room = webClient.get()
+                .uri("http://localhost:8080/api/v1/rooms/" + tenant.getRoomId()) // Corrected URI
+                .retrieve()
+                .bodyToMono(Room.class)
+                .block();
+
+        vo.setTenant(tenant);
+        vo.setRoom(room);
+
+        return vo;
     }
 }

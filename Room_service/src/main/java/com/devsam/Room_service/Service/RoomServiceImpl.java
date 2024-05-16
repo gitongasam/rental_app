@@ -25,7 +25,6 @@ public class RoomServiceImpl implements RoomService {
                 .orElseThrow(() -> new RuntimeException("Room not found with ID: " + roomID));
 
         // Update existing room with new data
-        existingRoom.setTenantId(room.getTenantId());
         existingRoom.setRoomNumber(room.getRoomNumber());
         existingRoom.setRentAmount(room.getRentAmount());
         existingRoom.setPaymentStatus(room.getPaymentStatus());
