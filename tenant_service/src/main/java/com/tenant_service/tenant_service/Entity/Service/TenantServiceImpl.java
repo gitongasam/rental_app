@@ -1,4 +1,4 @@
-package com.tenant_service.tenant_service.Service;
+package com.tenant_service.tenant_service.Entity.Service;
 
 import com.tenant_service.tenant_service.Entity.Tenant;
 import com.tenant_service.tenant_service.Repository.TenantRepository;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -18,9 +19,13 @@ public class TenantServiceImpl implements TenantService{
 
     @Autowired
     private WebClient webClient;
+    @Autowired
+    private WebClient.Builder webClientBuilder;
 
     @Override
     public Tenant addTenant(Tenant tenant) {
+        BigDecimal rentAmount = getRentAmountFromRoomService(tenant.getRoomId());
+        tenant.setBalance(rentAmount);
         return tenantRepository.save(tenant);
     }
 
@@ -71,5 +76,15 @@ public class TenantServiceImpl implements TenantService{
         vo.setRoom(room);
 
         return vo;
+    }
+
+//    a function to getRentAmountFromRoomService
+    private BigDecimal getRentAmountFromRoomService(Long roomId) {
+        return webClientBuilder.build()
+                .get()
+                .uri("http://localhost:8080/api/v1/rooms/{roomId}/rent-amount", roomId)
+                .retrieve()
+                .bodyToMono(BigDecimal.class)
+                .block();
     }
 }

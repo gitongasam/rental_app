@@ -1,4 +1,4 @@
-package com.tenant_service.tenant_service.Service;
+package com.tenant_service.tenant_service.Entity.Service;
 
 import com.tenant_service.tenant_service.Entity.Tenant;
 import com.tenant_service.tenant_service.VO.ResponseTemplateVo;

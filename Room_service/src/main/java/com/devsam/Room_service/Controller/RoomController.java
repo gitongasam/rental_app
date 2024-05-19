@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RequestMapping("api/v1/rooms")
@@ -44,5 +45,27 @@ public class RoomController {
     public ResponseEntity<List<Room>> getAllRooms() {
         List<Room> rooms = roomService.getAllRooms();
         return new ResponseEntity<>(rooms, HttpStatus.OK);
+    }
+
+    @PutMapping("/{roomId}/payment-status")
+    public ResponseEntity<Void> updateRoomPaymentStatus(@PathVariable Long roomId, @RequestParam String paymentStatus) {
+        roomService.updateRoomPaymentStatus(roomId, paymentStatus);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+//    Geting the room rent amount
+   @GetMapping("/{roomId}/rent-amount")
+    public BigDecimal getRentAmount(@PathVariable Long roomId) {
+        // Logic to fetch rent amount for the specified room ID
+        // This could be from your database or any other source
+        BigDecimal rentAmount = roomService.getRentAmountByRoomId(roomId);
+        return rentAmount;
+    }
+
+//    Getting the balance of the room
+    @PutMapping("/{roomId}/update-balance")
+    public ResponseEntity<Room> updateBalance(@PathVariable Long roomId, @RequestParam BigDecimal balance) {
+        Room updatedRoom = roomService.updateRoomBalance(roomId, balance);
+        return new ResponseEntity<>(updatedRoom, HttpStatus.OK);
     }
 }

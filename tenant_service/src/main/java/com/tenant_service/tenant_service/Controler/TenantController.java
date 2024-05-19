@@ -1,7 +1,7 @@
 package com.tenant_service.tenant_service.Controler;
 
 import com.tenant_service.tenant_service.Entity.Tenant;
-import com.tenant_service.tenant_service.Service.TenantService;
+import com.tenant_service.tenant_service.Entity.Service.TenantService;
 import com.tenant_service.tenant_service.VO.ResponseTemplateVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +22,7 @@ public class TenantController {
         Tenant newTenant = tenantService.addTenant(tenant);
         return new ResponseEntity<>(newTenant, HttpStatus.CREATED);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTenant(@PathVariable Long tenantID) {

@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Room {
     private Long roomId;
     private String roomNumber;
-    private double rentAmount;
+    private BigDecimal rentAmount;
     private String paymentStatus;
+    private BigDecimal balance;
 }
