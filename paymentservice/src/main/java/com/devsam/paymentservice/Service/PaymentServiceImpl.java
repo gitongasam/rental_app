@@ -5,6 +5,8 @@ import com.devsam.paymentservice.Repository.PaymentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -23,5 +25,9 @@ public class PaymentServiceImpl implements PaymentService {
                 .orElseThrow(() -> new RuntimeException("Payment not found with ID: " + paymentId));
     }
 
-    // Implement other methods as needed
+    @Override
+    public List<Payment> getAllPayment() {
+        return paymentRepository.findAll();
+    }
+
 }
