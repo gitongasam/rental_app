@@ -63,9 +63,9 @@ public class RoomController {
     }
 
 //    Getting the balance of the room
-    @PutMapping("/{roomId}/update-balance")
-    public ResponseEntity<Room> updateBalance(@PathVariable Long roomId, @RequestParam BigDecimal balance) {
-        Room updatedRoom = roomService.updateRoomBalance(roomId, balance);
-        return new ResponseEntity<>(updatedRoom, HttpStatus.OK);
-    }
+@PutMapping("/{roomId}/update-balance")
+public ResponseEntity<Void> updateBalance(@PathVariable Long roomId, @RequestParam BigDecimal balance) {
+    roomService.updateRoomBalance(roomId, balance);
+    return ResponseEntity.ok().build();
+}
 }
