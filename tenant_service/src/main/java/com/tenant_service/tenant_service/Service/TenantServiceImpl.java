@@ -62,6 +62,7 @@ public class TenantServiceImpl implements TenantService {
         return tenantRepository.findAll();
     }
 
+//    get tenant with room from the room service
     @Override
     public ResponseTemplateVo getTenantWithRoom(Long id) {
         ResponseTemplateVo vo = new ResponseTemplateVo();
@@ -83,6 +84,7 @@ public class TenantServiceImpl implements TenantService {
         return vo;
     }
 
+//    get rent amount from room service
     private BigDecimal getRentAmountFromRoomService(Long roomId) {
         return webClientBuilder.build()
                 .get()
@@ -91,6 +93,8 @@ public class TenantServiceImpl implements TenantService {
                 .bodyToMono(BigDecimal.class)
                 .block();
     }
+
+//     update room balance to get the balance of the t=room in the tenant
 
     private void updateRoomBalance(Long roomId, BigDecimal balance) {
         webClientBuilder.build()
