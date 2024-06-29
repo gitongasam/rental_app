@@ -3,25 +3,12 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="tenant_service" />
-        <module name="paymentservice" />
-        <module name="Room_service" />
-        <module name="service-discovery" />
-        <module name="gateway" />
-      </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Room_service" options="-parameters" />
-      <module name="gateway" options="-parameters" />
-      <module name="paymentservice" options="-parameters" />
-      <module name="service-discovery" options="-parameters" />
-      <module name="tenant_service" options="-parameters" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="paymentservice" target="21" />
+      <module name="Room_service" target="21" />
+      <module name="service-discovery" target="21" />
+      <module name="tenant_service" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>
