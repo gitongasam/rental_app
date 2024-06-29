@@ -16,7 +16,6 @@
 	<properties>
 		<java.version>22</java.version>
 		<spring-cloud.version>2023.0.2</spring-cloud.version>
-
 	</properties>
 	<dependencies>
 		<dependency>
@@ -32,6 +31,7 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
+
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
@@ -52,6 +52,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
