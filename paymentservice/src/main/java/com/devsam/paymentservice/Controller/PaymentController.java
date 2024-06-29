@@ -20,7 +20,7 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @PostMapping
+    @PostMapping("/pay")
     public ResponseEntity<Payment> recordPayment(@RequestBody Payment payment) {
         Payment savedPayment = paymentService.makePayment(payment);
         return new ResponseEntity<>(savedPayment, HttpStatus.CREATED);

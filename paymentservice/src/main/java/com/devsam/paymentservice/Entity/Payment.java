@@ -24,7 +24,5 @@ public class Payment {
     private double amount;
     private Date date;
     private String description;
-
-
 }
 
